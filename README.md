@@ -2,14 +2,16 @@
 ## Overview
 CLI for Acronis Notary to verify hash in Merkle Patricia Tree root/proof.
 
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE)
+
 ## Installation
 
-1. Clone repository `mkdir verifyhash && git clone git@github.com:acronis/notary-verifyhash.git && cd verify`
+1. Clone the repository `mkdir verifyhash && git clone git@github.com:acronis/notary-verifyhash.git && cd verify`
 2. Build and install dependencies `go get -d ./... && go install`
 
 ## How to use
 
-- Print the verifyhash help
+- Print the `verifyhash` help
 
 ```
 $ verifyhash --help
@@ -55,4 +57,5 @@ Standart input:
   ```
 
 ## License
+
 MIT
