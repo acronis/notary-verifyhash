@@ -11,7 +11,7 @@ CLI for Acronis Notary to verify hash in Merkle Patricia Tree root/proof.
 
 ## How to use
 
-- Print the `verifyhash` help
+#### Print the `verifyhash` help
 
 ```
 $ verifyhash --help
@@ -36,7 +36,7 @@ GLOBAL OPTIONS:
 ```
 
 
-#### Example usage:
+#### Example usage
 
 Standart input:
 
