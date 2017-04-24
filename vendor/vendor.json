@@ -1,0 +1,139 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "Eu4iBa1TK3Y5ZQkP4RUi0XTw6tY=",
+			"path": "github.com/btcsuite/btcd/btcec",
+			"revision": "4b348c1d33373d672edd83fc576892d0e46686d2",
+			"revisionTime": "2017-03-22T18:48:02Z"
+		},
+		{
+			"checksumSHA1": "AFWaoLtHvtQdItiCjY6nH7WicjQ=",
+			"path": "github.com/ethereum/go-ethereum",
+			"revision": "d2fda73ad7f4771dadb265d1cbfaecaaabb2cb42",
+			"revisionTime": "2017-04-20T14:42:36Z"
+		},
+		{
+			"checksumSHA1": "kNzV1C05L06KodIVQqiDdUKvyhs=",
+			"path": "github.com/ethereum/go-ethereum/common",
+			"revision": "d2fda73ad7f4771dadb265d1cbfaecaaabb2cb42",
+			"revisionTime": "2017-04-20T14:42:36Z"
+		},
+		{
+			"checksumSHA1": "NIN7nslnw4fUJlVcuxf5anvxAKQ=",
+			"path": "github.com/ethereum/go-ethereum/common/hexutil",
+			"revision": "d2fda73ad7f4771dadb265d1cbfaecaaabb2cb42",
+			"revisionTime": "2017-04-20T14:42:36Z"
+		},
+		{
+			"checksumSHA1": "cRk5SlZP3/RhwNdHChOK2Wn+59g=",
+			"path": "github.com/ethereum/go-ethereum/common/math",
+			"revision": "d2fda73ad7f4771dadb265d1cbfaecaaabb2cb42",
+			"revisionTime": "2017-04-20T14:42:36Z"
+		},
+		{
+			"checksumSHA1": "DAEij1dH2LwKfzIh7W5xCKptv20=",
+			"path": "github.com/ethereum/go-ethereum/core/types",
+			"revision": "d2fda73ad7f4771dadb265d1cbfaecaaabb2cb42",
+			"revisionTime": "2017-04-20T14:42:36Z"
+		},
+		{
+			"checksumSHA1": "nBhXdtdJ2zsZ8VLueR/0MdQSI0M=",
+			"path": "github.com/ethereum/go-ethereum/crypto",
+			"revision": "d2fda73ad7f4771dadb265d1cbfaecaaabb2cb42",
+			"revisionTime": "2017-04-20T14:42:36Z"
+		},
+		{
+			"checksumSHA1": "VsqOiLFDRSDa67wPeqlxKJmE0XE=",
+			"path": "github.com/ethereum/go-ethereum/crypto/secp256k1",
+			"revision": "d2fda73ad7f4771dadb265d1cbfaecaaabb2cb42",
+			"revisionTime": "2017-04-20T14:42:36Z"
+		},
+		{
+			"checksumSHA1": "yunX3AjO6JiMz0NSY/krvG3VWsk=",
+			"path": "github.com/ethereum/go-ethereum/crypto/sha3",
+			"revision": "d2fda73ad7f4771dadb265d1cbfaecaaabb2cb42",
+			"revisionTime": "2017-04-20T14:42:36Z"
+		},
+		{
+			"checksumSHA1": "NbRntdNRuwam0wGGNJ6HrR83P0M=",
+			"path": "github.com/ethereum/go-ethereum/log",
+			"revision": "d2fda73ad7f4771dadb265d1cbfaecaaabb2cb42",
+			"revisionTime": "2017-04-20T14:42:36Z"
+		},
+		{
+			"checksumSHA1": "exgRI2u0lW6gQbpNez0GXLWs2b8=",
+			"path": "github.com/ethereum/go-ethereum/params",
+			"revision": "d2fda73ad7f4771dadb265d1cbfaecaaabb2cb42",
+			"revisionTime": "2017-04-20T14:42:36Z"
+		},
+		{
+			"checksumSHA1": "ERaBPyDJCbMQRJsR6Kpqkr7dqfg=",
+			"path": "github.com/ethereum/go-ethereum/rlp",
+			"revision": "d2fda73ad7f4771dadb265d1cbfaecaaabb2cb42",
+			"revisionTime": "2017-04-20T14:42:36Z"
+		},
+		{
+			"checksumSHA1": "tUVrbXkisnAmJKJ+NxD5z9BKFwU=",
+			"path": "github.com/ethereum/go-ethereum/trie",
+			"revision": "d2fda73ad7f4771dadb265d1cbfaecaaabb2cb42",
+			"revisionTime": "2017-04-20T14:42:36Z"
+		},
+		{
+			"checksumSHA1": "16fWSep+3jUx8wADdbiTxSHjW14=",
+			"path": "github.com/fatih/color",
+			"revision": "9131ab34cf20d2f6d83fdc67168a5430d1c7dc23",
+			"revisionTime": "2017-03-07T19:28:53Z"
+		},
+		{
+			"checksumSHA1": "2sj/DbXoXdnPAfjAEyhS0Jj5QL0=",
+			"path": "github.com/go-stack/stack",
+			"revision": "100eb0c0a9c5b306ca2fb4f165df21d80ada4b82",
+			"revisionTime": "2016-05-14T03:44:11Z"
+		},
+		{
+			"checksumSHA1": "uAVg4Tj5Fxi62z7/ScDEkHr6Ue8=",
+			"path": "github.com/mattn/go-colorable",
+			"revision": "ded68f7a9561c023e790de24279db7ebf473ea80",
+			"revisionTime": "2017-03-27T08:33:44Z"
+		},
+		{
+			"checksumSHA1": "U6lX43KDDlNOn+Z0Yyww+ZzHfFo=",
+			"path": "github.com/mattn/go-isatty",
+			"revision": "fc9e8d8ef48496124e79ae0df75490096eccf6fe",
+			"revisionTime": "2017-03-22T23:44:13Z"
+		},
+		{
+			"checksumSHA1": "BvKj5/eGAn2giK5qZ+laFEpb1Ik=",
+			"path": "github.com/onrik/gomerkle",
+			"revision": "dfb3b6404931f16d66fd750848c14036821c6262",
+			"revisionTime": "2017-04-20T12:41:58Z"
+		},
+		{
+			"checksumSHA1": "KAzbLjI9MzW2tjfcAsK75lVRp6I=",
+			"path": "github.com/rcrowley/go-metrics",
+			"revision": "1f30fe9094a513ce4c700b9a54458bbb0c96996c",
+			"revisionTime": "2016-11-28T21:05:44Z"
+		},
+		{
+			"checksumSHA1": "K/CP3EBR0TUpw8DPpjRExGEYNkY=",
+			"path": "github.com/urfave/cli",
+			"revision": "8ba6f23b6e36d03666a14bd9421f5e3efcb59aca",
+			"revisionTime": "2017-03-29T01:35:17Z"
+		},
+		{
+			"checksumSHA1": "ZVZBntvdoK/qUq/6uF8YMWmuMC4=",
+			"path": "golang.org/x/sys/unix",
+			"revision": "ea9bcade75cb975a0b9738936568ab388b845617",
+			"revisionTime": "2017-03-08T18:50:27Z"
+		},
+		{
+			"checksumSHA1": "DQXNV0EivoHm4q+bkdahYXrjjfE=",
+			"path": "gopkg.in/karalabe/cookiejar.v2/collections/prque",
+			"revision": "8dcd6a7f4951f6ff3ee9cbb919a06d8925822e57",
+			"revisionTime": "2015-07-24T13:16:13Z"
+		}
+	],
+	"rootPath": "notary-verifyhash"
+}
