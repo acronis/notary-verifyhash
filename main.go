@@ -1,7 +1,6 @@
 package main
 
 import (
-	"io/ioutil"
 	"os"
 	"time"
 
@@ -12,40 +11,26 @@ import (
 func main() {
 	var (
 		certificate,
-		object,
 		root,
 		proof,
-		fobject,
-		fproof string
+		eTag string
 	)
 
 	app := cli.NewApp()
 	app.Name = "Verifyhash"
-	app.Version = "1.0"
+	app.Version = "2.0"
 	app.Compiled = time.Now()
 	app.Copyright = "(c) 2016 Acronis International GmbH"
 	app.Usage = "Acronis Notary verify hash CLI utility"
 	app.UsageText = `verifyhash [global options]
 
-	 Required flags: -c|-o|-fo, -p|-fp, -r`
+	Required flags: -c, -r, -p, -e`
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:        "cert, c",
 			Value:       "",
 			Usage:       "ID of certificate",
 			Destination: &certificate,
-		},
-		cli.StringFlag{
-			Name:        "object, o",
-			Value:       "",
-			Usage:       "\"Object\" from certificate",
-			Destination: &object,
-		},
-		cli.StringFlag{
-			Name:        "fobject, fo",
-			Value:       "",
-			Usage:       "Path to the file with the \"object\" from certificate",
-			Destination: &fobject,
 		},
 		cli.StringFlag{
 			Name:        "root, r",
@@ -60,54 +45,20 @@ func main() {
 			Destination: &proof,
 		},
 		cli.StringFlag{
-			Name:        "fproof, fp",
+			Name:        "etag, e",
 			Value:       "",
-			Usage:       "Path to the file with merkle proof",
-			Destination: &fproof,
+			Usage:       "File eTag",
+			Destination: &eTag,
 		},
 	}
 
-	app.Action = func(c *cli.Context) (err error) {
-		var val, b []byte
-		var data dataVerification
-
-		if len(object) != 0 && len(fobject) == 0 {
-			if certificate, err = hashObject([]byte(object)); err != nil {
-				color.Yellow("\n%v", err)
-				return nil
-			}
+	app.Action = func(c *cli.Context) error {
+		err := verifyProof([]byte(proof), root, certificate, eTag)
+		if err != nil {
+			color.Red("Error: %s", err.Error())
+		} else {
+			color.Green("Verification successful")
 		}
-		if len(fobject) != 0 {
-			b, err = ioutil.ReadFile(fobject)
-			if err != nil {
-				color.Yellow("\n%v", err)
-				return nil
-			}
-			if certificate, err = hashObject(b); err != nil {
-				color.Yellow("\n%v", err)
-				return nil
-			}
-		}
-		if len(fproof) != 0 {
-			b, err = ioutil.ReadFile(fproof)
-			if err != nil {
-				color.Yellow("\n%v", err)
-				return nil
-			}
-			proof = string(b)
-		}
-
-		if err = data.setData(certificate, root, proof); err != nil {
-			color.Yellow("\n%v", err)
-			return nil
-		}
-
-		if val, err = data.getValFromTree(); err != nil || len(val) == 0 {
-			color.Red("\n%v", err)
-			return nil
-		}
-
-		color.Green("\nVerification successful\nValue: %s\n", string(val))
 
 		return nil
 	}

@@ -1,73 +1,109 @@
 package main
 
 import (
+	"bytes"
+	"crypto/sha256"
 	"encoding/hex"
-	"fmt"
-	"strings"
+	"encoding/json"
+	"errors"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/rlp"
 	"github.com/ethereum/go-ethereum/trie"
-	// imports as package "cli"
+	"github.com/onrik/gomerkle"
 )
 
-type dataVerification struct {
-	certificate string
-	object      string
-	root        string
-	proof       string
+var (
+	errInvalidCert        = errors.New("Invalid cert")
+	errInvalidRoot        = errors.New("Invalid root")
+	errInvalidProof       = errors.New("Invalid proof")
+	errInvalidProofFormat = errors.New("Invalid proof format")
+	errInvalidETag        = errors.New("Invalid eTag")
+)
+
+func verifyProof(proof []byte, root, cert, eTag string) error {
+	if p, err := proofFromJSON(proof); err == nil {
+		return verifyMerkleProof(p, root, eTag)
+	}
+
+	patriciaProof, err := patriciaTrieProofFromJSON(proof)
+	if err != nil {
+		return errInvalidProofFormat
+	}
+
+	return verifyPatriciaTrieProof(patriciaProof, root, cert, eTag)
 }
 
-func (d *dataVerification) setData(certificate, root, proof string) (err error) {
-	d.certificate = certificate
-	d.root = root
-	d.proof = proof
+// Merkle tree
+func verifyMerkleProof(proof gomerkle.Proof, root, eTag string) error {
+	rootByte, err := hex.DecodeString(root)
+	if err != nil {
+		return errInvalidRoot
+	}
 
-	var messages []string
-	if len(d.certificate) == 0 {
-		messages = append(messages, "certificate")
-	}
-	if len(d.root) == 0 {
-		messages = append(messages, "merkle root")
-	}
-	if len(d.proof) == 0 {
-		messages = append(messages, "merkle proof")
-	}
-	if len(messages) != 0 {
-		return fmt.Errorf("%v is not entered \n", strings.Join(messages, ", "))
+	value := sha256.Sum256([]byte(eTag))
+	tree := gomerkle.NewTree(sha256.New())
+	valid := tree.VerifyProof(proof, rootByte, value[:])
+	if !valid {
+		return errors.New("Invalid proof or eTag")
 	}
 
 	return nil
 }
 
-func (d *dataVerification) getValFromTree() (val []byte, err error) {
-	var (
-		rootByte  common.Hash
-		proofByte []rlp.RawValue
-		hashByte  []byte
-	)
-
-	if proofByte, err = proofFromJSON([]byte(d.proof)); err != nil {
-		return val, fmt.Errorf("Invalid proof")
+func proofFromJSON(data []byte) (gomerkle.Proof, error) {
+	hexProof := []map[string]string{}
+	err := json.Unmarshal(data, &hexProof)
+	if err != nil {
+		return nil, err
 	}
 
-	func() {
-		defer func() {
-			if r := recover(); r != nil {
-				fmt.Println("\nInvalid root", r)
+	proof := make(gomerkle.Proof, len(hexProof))
+	for i := range hexProof {
+		proof[i] = map[string][]byte{}
+		for key, value := range hexProof[i] {
+			proof[i][key], err = hex.DecodeString(value)
+			if err != nil {
+				return proof, err
 			}
-		}()
-
-		rootByte = common.HexToHash(d.root)
-	}()
-
-	if hashByte, err = hex.DecodeString(d.certificate); err != nil {
-		return val, fmt.Errorf("Invalid certificate ID")
+		}
 	}
 
-	if val, err = trie.VerifyProof(rootByte, hashByte, proofByte); err != nil {
-		return val, fmt.Errorf("Verification failed")
+	return proof, nil
+}
+
+// Merkle patricia trie
+func verifyPatriciaTrieProof(proof []rlp.RawValue, root, cert, eTag string) error {
+	certByte, err := hex.DecodeString(cert)
+	if err != nil {
+		return errInvalidCert
 	}
 
-	return val, err
+	value, err := trie.VerifyProof(common.HexToHash(root), certByte, proof)
+	if err != nil {
+		return errInvalidProof
+	}
+	equal := bytes.Equal(value, []byte(eTag))
+	if !equal {
+		return errInvalidETag
+	}
+	return nil
+}
+
+func patriciaTrieProofFromJSON(data []byte) ([]rlp.RawValue, error) {
+	hexProof := []string{}
+	err := json.Unmarshal(data, &hexProof)
+	if err != nil {
+		return nil, err
+	}
+
+	proof := make([]rlp.RawValue, len(hexProof))
+	for i, v := range hexProof {
+		proof[i], err = hex.DecodeString(v)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return proof, nil
 }
