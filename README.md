@@ -6,8 +6,7 @@ CLI for Acronis Notary created to verify Merkle Tree and Merkle Patricia Tree ro
 
 ## Installation
 
-1. Clone the repository `mkdir verifyhash && git clone https://github.com/acronis/notary-verifyhash.git verifyhash && cd verifyhash`
-2. Build and install dependencies `go get -d ./... && go install`
+1. Go to [raleases page](https://github.com/acronis/notary-verifyhash/releases) and download latest release for your operating system.
 
 ## How to use
 
