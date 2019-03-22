@@ -41,9 +41,15 @@ func verifyMerkleProof(proof gomerkle.Proof, root, eTag string) error {
 		return errInvalidRoot
 	}
 
-	value := sha256.Sum256([]byte(eTag))
 	tree := gomerkle.NewTree(sha256.New())
-	valid := tree.VerifyProof(proof, rootByte, value[:])
+	eTagByte, _ := hex.DecodeString(eTag)
+	valid := tree.VerifyProof(proof, rootByte, eTagByte)
+	if valid {
+		return nil
+	}
+
+	value := sha256.Sum256([]byte(eTag))
+	valid = tree.VerifyProof(proof, rootByte, value[:])
 	if !valid {
 		return errors.New("Invalid proof or eTag")
 	}
