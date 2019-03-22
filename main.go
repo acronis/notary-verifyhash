@@ -18,7 +18,7 @@ func main() {
 
 	app := cli.NewApp()
 	app.Name = "Verifyhash"
-	app.Version = "2.0"
+	app.Version = "2.1"
 	app.Compiled = time.Now()
 	app.Copyright = "(c) 2016 Acronis International GmbH"
 	app.Usage = "Acronis Notary verify hash CLI utility"
