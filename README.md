@@ -10,36 +10,38 @@ Acronis Notary™ verifyhash CLI utility is created to verify Merkle Tree/Merkle
 To build the module, you need to have the Make utility and Docker installed on your machine. 
 #### Windows
 
-Install Docker : https://docs.docker.com/docker-for-windows/install/ 
-Note: Hyper-V must be enabled for Docker for Windows. For more details how to enable Hyper-V, refer to https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v. Ensure that no other virtualization software is enabled along with Hyper-V, otherwise it will cause a conflict.
-
 Install Make
 
 ```
-    Winget install GnuWin32.make
+    Winget install GnuWin32.make --location "C:\MinGW"
 ```
 
-Type `C:\MinGW\bin\mingw32-make.exe` in the root repository folder and press Enter.
+Install Docker : https://docs.docker.com/desktop/windows/install/
+Note: Hyper-V must be enabled for Docker for Windows. For more details how to enable Hyper-V, refer to https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v. Ensure that no other virtualization software is enabled along with Hyper-V, otherwise it will cause a conflict.
+
+Type `C:\MinGW\bin\make.exe` in the root repository folder and press Enter.
 
 ```
-    C:\MinGW\bin\mingw32-make.exe
+    C:\MinGW\bin\make.exe
 ```
 
 The binaries will be created in the root repository folder
 
 #### Linux
 
-Install Make
+Install Make (redhat/centos)
+
+```
+    sudo yum install make
+```
+
+Install Make (ubuntu)
 
 ```
     sudo apt-get install make
 ```
 
-Install Docker
-
-```
-    sudo snap install docker --devmode
-```
+Install Docker : https://docs.docker.com/desktop/linux/install/
 
 Type `make` in the root repository folder and press Enter.
 
@@ -48,7 +50,7 @@ Type `make` in the root repository folder and press Enter.
 ```
 The binaries will be created in the root repository folder
 
-#### MacOS
+#### MacOS (NOTE: We do not support Mac with M1 chip)
 
 Install Make (Command line tools)
 
@@ -56,7 +58,7 @@ Install Make (Command line tools)
     xcode-select --install
 ```
 
-Install Docker : https://docs.docker.com/docker-for-mac/install/
+Install Docker : https://docs.docker.com/desktop/mac/install/
 
 Type `make` in the root repository folder and press Enter.
 
@@ -70,7 +72,7 @@ The binaries will be created in the root repository folder
 #### Print the `verifyhash` help
 
 ```
-$ verifyhash --help
+$ ./verifyhash --help
 
 USAGE:
    verifyhash [global options]
@@ -104,4 +106,4 @@ Verify Merkle Tree
   $ ./verifyhash --root=543a5b1d24df27386fd138a84fe02badf2ca98603cabd06267e4b56e2c0a7c79 --proof="[{\"right\":\"8fbda2c989ea391cc5afdd2270cbd3802132a0a25b03db0d40d9473887881c7e\"},{\"left\":\"e1122abf373076abb65af59b8e1492f7d026774cb9225fac377df55611f1d6e6\"},{\"left\":\"35246b8c8713282bce735db1ca4c6c054e4b6b51b0c1e5bd1857feef5c86554f\"},{\"right\":\"d3a22c30a455ca220b5e45cbc4f5279a6144d6288c00557d269455f44cf53bd5\"}]" --etag=7b2febf73e033aec3270d4b5ba7ee1f666f2b01944d011c8ce5f02b86f0c5c0f
 `
 
-Copyright © 2003-2020 Acronis International GmbH. This is distributed under MIT license.
+Copyright © 2019-2022 Acronis International GmbH. This is distributed under MIT license.

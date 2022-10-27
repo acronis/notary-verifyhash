@@ -4,8 +4,9 @@ ifeq ($(OS),Windows_NT)
     #Windows 
     CURRENT_DIR = $(CURDIR)
 else
-    #Linux
+    #Mac & Linux
     CURRENT_DIR = $(shell pwd)
+    OS = $(shell uname -s)
 endif
 
 BUILD_VERSION = $(VERSION)
@@ -13,8 +14,8 @@ BUILD_UPLOAD_PATH ?= $(CURRENT_DIR)/release
 
 IMAGE= notary-verifyhash-image
 CONTAINER = notary-verifyhash-container
-BUILD_CMD = bash -e ./build.sh
-DOCKER_CMD = docker run --name $(CONTAINER) --rm -i -v "$(CURRENT_DIR):/mnt" -w /mnt $(IMAGE)
+BUILD_CMD = bash -e ./build.sh $(OS)
+DOCKER_CMD = docker run  --platform linux/amd64 --name $(CONTAINER) --rm -i -v "$(CURRENT_DIR):/mnt" -w /mnt $(IMAGE)
 
 build-package: image
 	$(DOCKER_CMD) $(BUILD_CMD)
